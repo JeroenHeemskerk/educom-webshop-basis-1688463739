@@ -4,11 +4,50 @@
         <title>CONTACT</title>
     </head>
     <body>
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="contact.html">Contact</a></li>
-        </ul>
+        <header>
+            <ul>
+                <!-- Navigation links-->
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul><hr>
+            <h1>Contact Me</h1>
+        </header>
+        <!-- Form starts here. -->
+        <form>
+            <!-- Dropdown menu section. -->
+            <label for="gender">Gender</label>
+            <select>
+                <option value="male.">Male</option>
+                <option value="female.">Female</option>
+            </select><br><br>
+
+            <!-- Invoervelden section. -->
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name"><br><br>
+            <label for="email">Email</label>
+            <input type="text" id="email" name="email"><br><br>
+            <label for="phone">Phone</label>
+            <input type="text" id="phone" name="phone"><br><br>
+            <label for="subject">Subject</label>
+            <input type="text" id="subject" name="subject"><br><br>
+
+            <!-- Communicatievoorkeur section. -->
+            <label for="communicatievoorkeur">Communication preference:</label><br>
+            <input type="radio" id="radio_email" name="communicatievoorkeur">
+            <label for="radio_email">Email</label><br>
+            <input type="radio" id="radio_phone" name="communicatievoorkeur">
+            <label for="radio_phone">Phone</label><br><br>
+
+            <!-- Message section. -->
+            <label for="message">Message</label><br>
+            <textarea name="message" id="message" cols="30" rows="10"></textarea><br><br>
+
+            <!-- Submit button. -->
+            <input type="submit" value="Submit">
+        </form><br>
+
+        <footer id="footer">Copyright &#169; 2023 by Quincy Tromp</footer>
+
     </body>
-    <footer>Copyright © 2023 by Quincy Tromp</footer>
 </html>
