@@ -2,26 +2,38 @@
 <html>
     <head>
         <title>ABOUT</title>
+        <link rel="stylesheet" href="CSS/stylesheet.css">
     </head>
     <body>
-        <header>
-            <ul>
-                <!-- Navigation links-->
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul><hr>
-            <h1>About Me</h1>
+        <header id="header">
+            <div class="navbar">
+                <ul class="nav">
+                    <!-- Navigation links-->
+                    <li><a class="navlink" href="index.html">Home</a></li>
+                    <li><a class="navlink" href="about.html">About Me</a></li>
+                    <li><a class="navlink" href="contact.html">Contact</a></li>
+                </ul>
+            </div>
         </header>
         <!-- About Me section. -->
-        <p>Hi, my name is Quincy. My goal is to become a data engineer. I'm currently doing a traineeship at Educom, to get a solid foundation in software development.</p>
-        <p>I'm 29 years old, live in Rotterrdam, and enjoy:
-            <ul>
-                <li>Reading</li>
-                <li>Exercising</li>
-                <li>Cooking</li>
-            </ul>
-        </p>
-        <footer id="footer">Copyright &#169; 2023 by Quincy Tromp</footer>
+        <div class="about_container">
+            <h2 id="about_title" class="aboutme">About Quincy Tromp</h2>
+            <img id="about_img" class="profile_img" src="../img/profile_picture.JPG" alt="A profile picture of me">
+            <p class="about">
+                Hi, my name is Quincy. My goal is to become a data engineer.<br>
+                To get a solid foundation in software development, I'm currently <br>
+                doing a traineeship at Educom.<br><br>
+                I live in Rotterrdam, and enjoy:
+                <ul>
+                    <li>Reading</li>
+                    <li>Exercising</li>
+                    <li>Cooking</li>
+                </ul>
+                If you want to get in touch, go to my <a class="navlink" href="contact.html">contact</a> page and message me.
+            </p>
+        </div>
+        <footer id="footer" class="footer">
+            <p id="footer_text">Copyright &#169; 2023 by Quincy Tromp</p>
+        </footer>
     </body>
 </html>

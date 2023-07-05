@@ -2,22 +2,30 @@
 <html>
     <head>
         <title>HOME</title>
+        <link rel="stylesheet" href="CSS/stylesheet.css">
     </head>
     <body>
-        <header>
-            <ul>
-                <!-- Navigation links-->
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul><hr>
-            <h1>Home</h1>
-        </header>
+        <header id="header">
+            <div class="navbar">
+                <ul id="nav">
+                    <!-- Navigation links-->
+                    <li><a class="navlink" href="index.html">Home</a></li>
+                    <li><a class="navlink" href="about.html">About Me</a></li>
+                    <li><a class="navlink" href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </header><br>
         <!-- Home section. -->
-        <h2>Quincy Tromp</h2>
-        <h3>Trainee Application/Software Development at Educom</h3>
-        <img src="../img/profile_picture.JPG" alt="A profile picture of me">
-        <p>Welcome to my website.</p>
-        <footer id="footer">Copyright &#169; 2023 by Quincy Tromp</footer>
+        <div class="profile_container">
+            <img class="profile-img" src="../img/profile_picture.JPG" alt="A profile picture of me">
+            <h2 id="profile_name" class="profile">Quincy Tromp</h2>
+            <h4 id="profile_desc" class="profile">Trainee Application/Software Development at Educom</h4><br>
+        </div>
+        <p id="welcome_p" class="profile">Welcome to my website.</p>
+        <div class="foot_container">
+            <footer id="footer" class="footer">
+                <p id="footer_text">Copyright &#169; 2023 by Quincy Tromp</p>
+            </footer>
+        </div>
     </body>
 </html>

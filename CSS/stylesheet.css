@@ -1,1 +1,53 @@
 /* Cascade Style Sheet for this website */
+body {
+    max-width: 800px;
+    text-align: left;
+    margin: auto;
+}
+
+header {
+    height: 15%;
+    border-bottom: 2px solid lightgrey;
+}
+
+footer {
+    width: 800px;
+    height: 10%;
+    position: fixed;
+    bottom: 0;
+    border-top: 2px solid lightgrey;
+}
+
+#footer_text {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+}
+
+img {
+    width: 12%;
+}
+
+.contactme_label {
+    display: inline-block;
+    width: 50px;
+    text-align: left;
+}
+
+#contactme_cp {
+    width: 100%;
+}
+
+.contactme_resp {
+    background-color: lightgrey;
+}
+
+#submit_btn {
+    width: 100px;
+    height: 40px;
+    color: white;
+    background-color: #3B82F6;
+    font-size: medium;
+    font-weight: bold;
+    border-radius: 15%;
+}

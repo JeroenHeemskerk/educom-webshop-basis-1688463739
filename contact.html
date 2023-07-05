@@ -2,52 +2,58 @@
 <html>
     <head>
         <title>CONTACT</title>
+        <link rel="stylesheet" href="CSS/stylesheet.css">
     </head>
     <body>
-        <header>
-            <ul>
-                <!-- Navigation links-->
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul><hr>
-            <h1>Contact Me</h1>
+        <header id="header">
+            <div class="navbar">
+                <ul class="nav">
+                    <!-- Navigation links-->
+                    <li><a class="navlink" href="index.html">Home</a></li>
+                    <li><a class="navlink" href="about.html">About Me</a></li>
+                    <li><a class="navlink" href="contact.html">Contact</a></li>
+                </ul>
+            </div>
         </header>
         <!-- Form starts here. -->
-        <form>
-            <!-- Dropdown menu section. -->
-            <label for="gender">Gender</label>
-            <select>
-                <option value="male.">Male</option>
-                <option value="female.">Female</option>
-            </select><br><br>
+        <div class="contactme_container">
+            <h2 id="contactme_title" class="contactme">Contact Me</h2>
+            <form>
+                <!-- Dropdown menu section. -->
+                <label class="contactme_label" for="gender">Gender</label>
+                <select>
+                    <option value="male.">Male</option>
+                    <option value="female.">Female</option>
+                </select><br><br>
 
-            <!-- Invoervelden section. -->
-            <label for="name">Name</label>
-            <input type="text" id="name" name="name"><br><br>
-            <label for="email">Email</label>
-            <input type="text" id="email" name="email"><br><br>
-            <label for="phone">Phone</label>
-            <input type="text" id="phone" name="phone"><br><br>
-            <label for="subject">Subject</label>
-            <input type="text" id="subject" name="subject"><br><br>
+                <!-- Invoervelden section. -->
+                <label class="contactme_label" for="name">Name</label>
+                <input class="contactme_resp" type="text" id="name" name="name"><br><br>
+                <label class="contactme_label" for="email">Email</label>
+                <input class="contactme_resp" type="text" id="email" name="email"><br><br>
+                <label class="contactme_label" for="phone">Phone</label>
+                <input class="contactme_resp" type="text" id="phone" name="phone"><br><br>
+                <label class="contactme_label" for="subject">Subject</label>
+                <input class="contactme_resp" type="text" id="subject" name="subject"><br><br>
 
-            <!-- Communicatievoorkeur section. -->
-            <label for="communicatievoorkeur">Communication preference:</label><br>
-            <input type="radio" id="radio_email" name="communicatievoorkeur">
-            <label for="radio_email">Email</label><br>
-            <input type="radio" id="radio_phone" name="communicatievoorkeur">
-            <label for="radio_phone">Phone</label><br><br>
+                <!-- Communicatievoorkeur section. -->
+                <label id="contactme_cp" class="contactme_label" for="communicatievoorkeur">Communication preference:</label><br>
+                <input type="radio" id="radio_email" name="communicatievoorkeur">
+                <label class="contactme_label" for="radio_email">Email</label><br>
+                <input type="radio" id="radio_phone" name="communicatievoorkeur">
+                <label class="contactme_label" for="radio_phone">Phone</label><br><br>
 
-            <!-- Message section. -->
-            <label for="message">Message</label><br>
-            <textarea name="message" id="message" cols="30" rows="10"></textarea><br><br>
+                <!-- Message section. -->
+                <label class="contactme_label" for="message">Message</label><br>
+                <textarea class="contactme_resp" name="message" id="message" cols="30" rows="10"></textarea><br><br>
 
-            <!-- Submit button. -->
-            <input type="submit" value="Submit">
-        </form><br>
-
-        <footer id="footer">Copyright &#169; 2023 by Quincy Tromp</footer>
-
+                <!-- Submit button. -->
+                <input id="submit_btn" type="submit" value="Submit">
+            </form><br>
+        </div>
+        <div class="foot_container"></div>
+        <footer id="footer">
+            <p id="footer_text">Copyright &#169; 2023 by Quincy Tromp</p>
+        </footer>
     </body>
 </html>
