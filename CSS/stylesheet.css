@@ -63,24 +63,23 @@ form {
     margin-left: 50px;
 }
 
-select {
-    margin-left: 12px;
+.form_group {
+    display: block;
+    margin-top: 8px;
 }
-
-.form_label {
+.form_group label {
     display: inline-block;
     width: 50px;
     text-align: left;
 }
-
-#commpref_label {
-    width: 100%;
-}
-
-.form_response {
+.form_group input, .form_group select, .form_group textarea {
     background-color: #DDE6ED;
     margin-left: 12px;
     width: 400px;
+}
+
+.form_group select, input[type="radio"], label[for="communication_preference"]  {
+    width: auto;
 }
 
 #form_response_msg {
@@ -96,5 +95,6 @@ select {
     font-size: light;
     font-weight: bold;
     border-radius: 15%;
-    margin-left: 50px;
+    margin-left: 200px;
+    margin-top: 20px;
 }

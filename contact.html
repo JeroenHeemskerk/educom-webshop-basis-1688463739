@@ -17,39 +17,61 @@
         </header>
         <!-- Form starts here. -->
         <div class="form_container">
-            <h2 class="contactme">Contact Me</h2>
+            <h2>Contact Me</h2>
             <form>
                 <!-- Dropdown menu section. -->
-                <label class="form_label" for="gender">Gender</label>
-                <select>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                </select><br><br>
+                <div class="form_group">    
+                    <label class="form_label" for="gender">Gender</label> 
+                    <select>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                </div>
 
                 <!-- Inputfields section. -->
-                <label class="form_label" for="name">Name</label>
-                <input class="form_response" type="text" id="name" name="name"><br><br>
-                <label class="form_label" for="email">Email</label>
-                <input class="form_response" type="text" id="email" name="email"><br><br>
-                <label class="form_label" for="phone">Phone</label>
-                <input class="form_response" type="text" id="phone" name="phone"><br><br>
-                <label class="form_label" for="subject">Subject</label>
-                <input class="form_response" type="text" id="subject" name="subject"><br><br>
+                <div>
+                    <div class="form_group">
+                        <label class="form_label" for="name">Name</label>
+                        <input class="form_response" type="text" id="name" name="name">
+                    </div>
+                    <div  class="form_group">
+                        <label class="form_label" for="email">Email</label>
+                        <input class="form_response" type="text" id="email" name="email">
+                    </div>
+                    <div class="form_group">
+                        <label class="form_label" for="phone">Phone</label>
+                        <input class="form_response" type="text" id="phone" name="phone">
+                    </div>
+                    <div class="form_group">
+                        <label class="form_label" for="subject">Subject</label>
+                        <input class="form_response" type="text" id="subject" name="subject">
+                    </div>
+                </div>
 
                 <!-- Communication preference section. -->
-                <label id="commpref_label" class="form_label" for="communication_preference">Communication preference:</label><br>
-                <input type="radio" value="Email" id="radio_email" name="communication_preference">
-                <label class="form_label" for="radio_email">Email</label><br>
-                <input type="radio" value="Phone" id="radio_phone" name="communication_preference">
-                <label class="form_label" for="radio_phone">Phone</label><br><br>
+                <div class="form_group">
+                    <label class="form_label" for="communication_preference">Communication preference:</label>
+                    <div class="form_group">
+                        <input type="radio" value="Email" id="radio_email" name="communication_preference">
+                        <label class="form_label" for="radio_email">Email</label>
+                    </div>
+                    <div class="form_group">
+                        <input type="radio" value="Phone" id="radio_phone" name="communication_preference">
+                        <label class="form_label" for="radio_phone">Phone</label>
+                    </div>
+                </div>
 
                 <!-- Message section. -->
-                <label class="form_label" for="message">Message</label><br>
-                <textarea class="form_response" name="message" id="form_response_msg" cols="30" rows="10"></textarea><br><br>
+                <div class="form_group">
+                    <label class="form_label" for="message">Message</label>
+                    <div class="form_group">
+                        <textarea class="form_response" name="message" id="form_response_msg" cols="30" rows="10"></textarea>
+                    </div>
+                </div>
 
                 <!-- Submit button. -->
                 <input class="form_submit_btn" type="submit" value="Submit">
-            </form><br>
+            </form>
         </div>
         <div class="foot_container"></div>
         <footer id="footer">
