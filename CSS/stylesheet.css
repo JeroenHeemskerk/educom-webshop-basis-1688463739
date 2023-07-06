@@ -1,6 +1,6 @@
-/********************
+/******************************************************
 General section 
-********************/
+******************************************************/
 
 body {
     max-width: 800px;
@@ -55,9 +55,9 @@ footer {
     position: relative;
     top: 50%;
 }
-/********************
-CONTACT section 
-********************/
+/******************************************************
+FORM section 
+******************************************************/
 
 form {
     margin-left: 50px;
@@ -67,28 +67,28 @@ select {
     margin-left: 12px;
 }
 
-.contactme_label {
+.form_label {
     display: inline-block;
     width: 50px;
     text-align: left;
 }
 
-#contactme_cp {
+#commpref_label {
     width: 100%;
 }
 
-.contactme_resp {
+.form_response {
     background-color: #DDE6ED;
     margin-left: 12px;
     width: 400px;
 }
 
-#message {
+#form_response_msg {
     margin-left: 0px;
     width: 475px;
 }
 
-#submit_btn {
+.form_submit_btn {
     width: 100px;
     height: 40px;
     color: white;
