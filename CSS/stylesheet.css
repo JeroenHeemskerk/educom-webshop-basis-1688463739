@@ -1,31 +1,70 @@
-/* Cascade Style Sheet for this website */
+/********************
+General section 
+********************/
+
 body {
     max-width: 800px;
     text-align: left;
     margin: auto;
+    font-size: 12px;
+    color: #526D82;
 }
 
 header {
-    height: 15%;
+    height: 50px;
     border-bottom: 2px solid lightgrey;
 }
 
-footer {
-    width: 800px;
-    height: 10%;
-    position: fixed;
-    bottom: 0;
-    border-top: 2px solid lightgrey;
+#navbar {
+    list-style-type: none;
 }
 
-#footer_text {
-    margin: 0;
-    position: absolute;
-    top: 50%;
+#navbar .navlink {
+    padding: 8px;
+    border: 2px solid lightgrey;
+    vertical-align: top;
+    width: 150px;
+    float: left;
+    margin: 8px;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    background-color: #3B82F6;
+    font-weight: bold;
 }
 
 img {
     width: 12%;
+}
+
+footer {
+    width: 800px;
+    height: 50px;
+    position: absolute;
+    bottom: 0;
+    border-top: 2px solid lightgrey;
+    background-color: black;
+    color: white;
+    font-size: 10px;
+    text-align: right;
+}
+
+#footer_text {
+    margin: 0;
+    margin-right: 8px;
+    position: relative;
+    top: 50%;
+}
+/********************
+CONTACT section 
+********************/
+
+form {
+    margin-left: 50px;
+}
+
+select {
+    margin-left: 12px;
 }
 
 .contactme_label {
@@ -39,7 +78,14 @@ img {
 }
 
 .contactme_resp {
-    background-color: lightgrey;
+    background-color: #DDE6ED;
+    margin-left: 12px;
+    width: 400px;
+}
+
+#message {
+    margin-left: 0px;
+    width: 475px;
 }
 
 #submit_btn {
@@ -47,7 +93,8 @@ img {
     height: 40px;
     color: white;
     background-color: #3B82F6;
-    font-size: medium;
+    font-size: light;
     font-weight: bold;
     border-radius: 15%;
+    margin-left: 50px;
 }
