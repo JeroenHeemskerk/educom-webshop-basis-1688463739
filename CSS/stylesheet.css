@@ -88,6 +88,10 @@ form {
     width: auto;
 }
 
+#comm_pref {
+    width: auto;
+}
+
 #form_response_msg {
     margin-left: 0px;
     width: 475px;
@@ -103,4 +107,8 @@ form {
     border-radius: 15%;
     margin-left: 200px;
     margin-top: 20px;
+}
+
+.error {
+    color: red;
 }
