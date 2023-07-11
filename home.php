@@ -1,32 +1,10 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>HOME</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-        <link rel="stylesheet" href="CSS/stylesheet.css">
-    </head>
-    <body>
-        <header id="header">
-            <div class="navbar_container">
-                <ul id="navbar">
-                    <!-- Navigation links-->
-                    <li><a class="navlink" href="index.html">Home</a></li>
-                    <li><a class="navlink" href="about.html">About Me</a></li>
-                    <li><a class="navlink" href="contact.php">Contact</a></li>
-                </ul>
+<?php  
+
+function showHomeContent() {
+    echo    '<div class="profile_container">
+                <img class="profile-img" src="img/profile_picture.JPG" alt="A profile picture of me">
+                <h2 id="profile_name" class="profile">Quincy Tromp</h2>
+                <h4 id="profile_desc" class="profile">Trainee Application/Software Development at Educom</h4><br>
             </div>
-        </header><br>
-        <!-- Home section. -->
-        <div class="profile_container">
-            <img class="profile-img" src="img/profile_picture.JPG" alt="A profile picture of me">
-            <h2 id="profile_name" class="profile">Quincy Tromp</h2>
-            <h4 id="profile_desc" class="profile">Trainee Application/Software Development at Educom</h4><br>
-        </div>
-        <p id="welcome_p" class="profile">Welcome to my website.</p>
-        <div class="foot_container">
-            <footer id="footer" class="footer">
-                <p id="footer_text">Copyright &copy; 2023 by Quincy Tromp</p>
-            </footer>
-        </div>
-    </body>
-</html>
+            <p id="welcome_p" class="profile">Welcome to my website.</p>';
+}

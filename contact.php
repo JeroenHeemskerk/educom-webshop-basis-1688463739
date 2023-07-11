@@ -48,14 +48,14 @@
     }
 
     function thankYou($form_data) {
-        echo "Thank you for reaching out." . "<br>";
-        echo "Gender: " . $form_data['gender'] . "<br>";
-        echo "Name: " . $form_data['name'] . "<br>";
-        echo "Email: " . $form_data['email'] . "<br>";
-        echo "Phone: " . $form_data['phone'] . "<br>";
-        echo "Subject: " . $form_data['subject'] . "<br>";
-        echo "Communication preference: " . $form_data['comm_pref'] . "<br>";
-        echo "Message: " . $form_data['message'] . "<br>";
+        echo    'Thank you for reaching out. <br>
+                Gender: ' . $form_data['gender'] . '<br>
+                Name: ' . $form_data['name'] . ' <br>
+                Email: ' . $form_data['email'] . ' <br>
+                Phone: ' . $form_data['phone'] . ' <br>
+                Subject: ' . $form_data['subject'] . ' <br>
+                Communication preference: ' . $form_data['comm_pref'] . ' <br>
+                Message: ' . $form_data['message'] . ' <br>';   
     }
     /*************************************************************************
     *                   Server-side Processing of Form Data                  *
