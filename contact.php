@@ -2,25 +2,99 @@
     /*************************************************************************
     *                         Initiate Variables & Functions                 *
     **************************************************************************/
-    $form_data = array("gender"=>"","name"=>"","email"=>"","phone"=>"","subject"=>"","comm_pref"=>"","message"=>"");
-    $errors = array("gender"=>"","name"=>"","email"=>"","phone"=>"","subject"=>"","comm_pref"=>"","message"=>"");
-   
-    function validate($array, $array2) {
-        cleanData1($array)
+    function validateContact() {
+        $data = array("values" => array(), "errors" => array(), "validForm" => false);
+        $data = cleanData($data);
+        $data = validateData($data);
+        $data = validateForm($data);
+        return $data;
     }
 
-    function cleanData1($array) {
+    function cleanData($data) {
         foreach ($_POST as $key => $value) {
             $value = trim($value);
             $value = stripslashes($value);
             $value = htmlspecialchars($value);
-            $array[$key] = $value;
-            return $array;
+            $data["values"][$key] = $value;
+            return $data;
         }
     }
 
-    function validate
+    function validateData($data) {
+        $data = validateFields($data);
+        $data = validateName($data);
+        $data = validateEmail($data);
+    }
 
+    function validateFields($data) {
+        foreach ($data['values'] as $key => $value) {
+            if (empty($value)) {
+                $data = recordError($data, $key, "emptyField");
+            }
+        }
+        return $data;
+    }
+
+    function validateName($data) {
+        if (!preg_match("/^[a-zA-Z-' ]*$/",$data['values']['name'])) {
+            $data = recordError($data, "name", "invalidName")
+        }
+        return $data;
+    }
+
+    function validateEmail($data) {
+        if (!filter_var($data['values']['email'], FILTER_VALIDATE_EMAIL)) {
+            $data = recordError($data, "email", "invalidEmail");
+        }
+        return $data;
+    }
+
+    function recordError($data, $key, $error) {
+        switch ($error) {
+            case "emptyField":
+                if ($key == "comm_pref") {
+                    $data['errors'][$key] = "Communication preference is required";
+                }
+                else {
+                    $data['errors'][$key] = "$key is required";
+                }
+            case "invalidName":
+                $data['errors'][$key] = "Only letters and white space allowed";
+            case "invalidEmail":
+                $data['errors'][$key] = "Invalid email format";
+        }
+        return $data;
+    }
+
+    function validateForm($data) {
+        if (empty($data['errors'])) {
+            $data['validForm'] = true;
+        }
+        return $data;
+    }
+
+    function showThankYou($data) {
+        echo   'Thank you for reaching out.<br>
+                Gender: ' . getArrayValue($data["values"], "gender") . '<br>
+                Name: ' . getArrayValue($data["values"], "name") . '<br>
+                Email: ' . getArrayValue($data["values"], "email") . '<br>
+                Phone: ' . getArrayValue($data["values"], "phone") . '<br>
+                Subject: ' . getArrayValue($data["values"], "subject") . '<br>
+                Communication preference: ' . getArrayValue($data["values"], "comm_pref") . '<br>
+                Message: ' . getArrayValue($data["values"], "message") . '<br>';   
+    }
+
+    function getArrayValue($array, $key, $default='') { 
+        return isset($array[$key]) ? $array[$key] : $default; 
+    }
+
+    function showContactContent($data) {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $data = validateContact();
+        }
+    }
+
+############################################################################
     function cleanData($value) {
         # Returns clean value
         $value = trim($value);
@@ -53,12 +127,12 @@
         }
     }
 
-    function isEmpty($my_array) {
-        return in_array("", $my_array);
-    }
-
     function getArrayVal($array, $key, $default='') { 
         return isset($array[$key]) ? $array[$key] : $default; 
+    }
+
+    function isEmpty($data) {
+        return in_array("", $data['values']);
     }
 
     function thankYou($form_data) {
