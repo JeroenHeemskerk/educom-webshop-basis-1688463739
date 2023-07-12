@@ -12,54 +12,40 @@ function createNewContact() {
     return $data;
 }
 
-function validateContact() {
+function validateContact($data) {
     $data = cleanData($data);
     $data = validateData($data);
     $data = validateForm($data);
     return $data;
 }
 
-### $_POST
 function cleanData($data) {
     foreach ($_POST as $key => $value) {
         $value = trim($value);
         $value = stripslashes($value);
         $value = htmlspecialchars($value);
-        $data["values"]["key"] = $value;
+        $data["values"][$key] = $value;
     }
     return $data;
 }
-
-function validateData($data) {
-    $data = validateFields($data);
-    $data = validateName($data);
-    $data = validateEmail($data);
-}
 ###
-function validateField($data) {
-    foreach ($data["values"] as $key => $value) {
-        $value = cleanData($value);
-    }
-}
-function validateFields($data) {
+function validateData($data) {
     foreach ($data["values"] as $key => $value) {
         if (empty($value)) {
             $data = recordError($data, $key, "emptyField");
         }
-    }
-    return $data;
-}
-
-function validateName($data) {
-    if (!preg_match("/^[a-zA-Z-' ]*$/",$data["values"]["name"])) {
-        $data = recordError($data, "name", "invalidName");
-    }
-    return $data;
-}
-
-function validateEmail($data) {
-    if (!filter_var($data["values"]["email"], FILTER_VALIDATE_EMAIL)) {
-        $data = recordError($data, "email", "invalidEmail");
+        else {
+            switch($key) {
+                case "name":
+                    if (!preg_match("/^[a-zA-Z-' ]*$/",$data["values"]["name"])) {
+                        $data = recordError($data, "name", "invalidName");
+                    }
+                case "email":
+                    if (!filter_var($data["values"]["email"], FILTER_VALIDATE_EMAIL)) {
+                        $data = recordError($data, "email", "invalidEmail");
+                    }
+            } 
+        }
     }
     return $data;
 }
@@ -71,12 +57,12 @@ function recordError($data, $key, $error) {
                 $data["errors"][$key] = "Communication preference is required";
             }
             else {
-                $data["errors"][$key] = $key .  "is required";
+                $data["errors"][$key] = ucfirst($key) .  " is required";
             }
         case "invalidName":
-            $data["errors"][$key] = "Only letters and white space allowed";
+            $data["errors"]["name"] = "Only letters and white space allowed";
         case "invalidEmail":
-            $data["errors"][$key] = "Invalid email format";
+            $data["errors"]["email"] = "Invalid email format";
     }
     return $data;
 }
@@ -119,12 +105,8 @@ function showContactContent() {
     }
 }
 
-function showContactError($data, $key) {
-    echo '<span class="error">* ' . getArrayValue($data["errors"], $key) . '</span>';
-}
-
 function showContactForm($data) {
-    echo    '<form action="contact.php" method="POST">
+    echo    '<form action="index.php" method="POST">
 <!- Dropdown menu ->
                 <div class="form_group">    
                     <label class="form_label" for="gender">Gender</label> 
@@ -138,28 +120,28 @@ function showContactForm($data) {
                     <div class="form_group">
                         <label class="form_label" for="name">Name</label>
                         <input class="form_response" type="text" id="name" name="name" value="' . getArrayValue($data["values"], "name") . '">
-                        ' . showContactError($data, "name") . '
+                        <span class="error">* ' . getArrayValue($data["errors"], "name") . '</span>
                     </div>
                     <div  class="form_group">
                         <label class="form_label" for="email">Email</label>
                         <input class="form_response" type="text" id="email" name="email" value="' . getArrayValue($data["values"], "email") . '">
-                        ' . showContactError($data, "email") . '
+                        <span class="error">* ' . getArrayValue($data["errors"], "email") . '</span>
                     </div>
                     <div class="form_group">
                         <label class="form_label" for="phone">Phone</label>
                         <input class="form_response" type="text" id="phone" name="phone" value="' . getArrayValue($data["values"], "phone") . '">
-                        ' . showContactError($data, "phone") . '
+                        <span class="error">* ' . getArrayValue($data["errors"], "phone") . '</span>
                     </div>
                     <div class="form_group">
                         <label class="form_label" for="subject">Subject</label>
                         <input class="form_response" type="text" id="subject" name="subject" value="' . getArrayValue($data["values"], "subject") . '">
-                        ' . showContactError($data, "subject") . '
+                        <span class="error">* ' . getArrayValue($data["errors"], "subject") . '</span>
                     </div>
                 </div>
 <!- Communication preference ->
                 <div class="form_group">
                     <label id="comm_pref" class="form_label" for="comm_pref">Communication preference:</label>
-                    ' . showContactError($data, "comm_pref") . '
+                    <span class="error">* ' . getArrayValue($data["errors"], "comm_pref") . '</span>
                     <div class="form_group">
                         <input type="radio" value="email" id="email" name="comm_pref">
                         <label class="form_label" for="email">Email</label>
@@ -174,7 +156,7 @@ function showContactForm($data) {
                     <label class="form_label" for="message">Message</label>
                     <div class="form_group">
                         <textarea class="form_response" name="message" id="form_response_msg" cols="30" rows="10" value="' . getArrayValue($data["values"], "message") . '"></textarea>
-                        ' . showContactError($data, "message") . '
+                        <span class="error">* ' . getArrayValue($data["errors"], "message") . '</span>
                     </div>
                 </div>
 <!- Submit button ->

@@ -2,8 +2,17 @@
 $page = getRequestedPage();
 showResponsePage($page);
 
+function processRequest() {
+    ### 
+}
+
 function getRequestedPage() {
-    return $_GET['page'];
+    switch($_SERVER["REQUEST_METHOD"]) {
+        case "GET":
+            return $_GET['page'];
+        case "POST":
+            return "contact";
+    }
 }
 
 function showResponsePage($page) {
