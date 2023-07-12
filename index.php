@@ -66,7 +66,7 @@ function showContent($page) {
             break;
         case "contact":
             require "contact.php";
-            showContactContent($form_data, $errors);
+            showContactContent();
             break;
     }
 }
