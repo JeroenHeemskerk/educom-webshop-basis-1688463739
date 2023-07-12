@@ -32,37 +32,25 @@ function cleanData($data) {
 function validateData($data) {
     foreach ($data["values"] as $key => $value) {
         if (empty($value)) {
-            $data = recordError($data, $key, "emptyField");
-        }
-        else {
-            switch($key) {
-                case "name":
-                    if (!preg_match("/^[a-zA-Z-' ]*$/",$data["values"]["name"])) {
-                        $data = recordError($data, "name", "invalidName");
-                    }
-                case "email":
-                    if (!filter_var($data["values"]["email"], FILTER_VALIDATE_EMAIL)) {
-                        $data = recordError($data, "email", "invalidEmail");
-                    }
-            } 
-        }
-    }
-    return $data;
-}
-
-function recordError($data, $key, $error) {
-    switch ($error) {
-        case "emptyField":
             if ($key == "comm_pref") {
                 $data["errors"][$key] = "Communication preference is required";
             }
             else {
                 $data["errors"][$key] = ucfirst($key) .  " is required";
             }
-        case "invalidName":
-            $data["errors"]["name"] = "Only letters and white space allowed";
-        case "invalidEmail":
-            $data["errors"]["email"] = "Invalid email format";
+        }
+        else {
+            switch($key) {
+                case "name":
+                    if (!preg_match("/^[a-zA-Z-' ]*$/",$data["values"]["name"])) {
+                        $data["errors"]["name"] = "Only letters and white space allowed";
+                    }
+                case "email":
+                    if (!filter_var($data["values"]["email"], FILTER_VALIDATE_EMAIL)) {
+                        $data["errors"]["email"] = "Invalid email format";
+                    }
+            } 
+        }
     }
     return $data;
 }
@@ -138,7 +126,7 @@ function showContactForm($data) {
                         <span class="error">* ' . getArrayValue($data["errors"], "subject") . '</span>
                     </div>
                 </div>
-<!- Communication preference ->
+<!- Radio buttons ->
                 <div class="form_group">
                     <label id="comm_pref" class="form_label" for="comm_pref">Communication preference:</label>
                     <span class="error">* ' . getArrayValue($data["errors"], "comm_pref") . '</span>
@@ -151,7 +139,7 @@ function showContactForm($data) {
                         <label class="form_label" for="phone">Phone</label>
                     </div>
                 </div>
-<!- Message ->
+<!- Textarea ->
                 <div class="form_group">
                     <label class="form_label" for="message">Message</label>
                     <div class="form_group">
