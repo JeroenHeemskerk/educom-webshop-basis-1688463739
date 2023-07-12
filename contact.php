@@ -1,21 +1,33 @@
 <?php 
 
-function validateContact() {
+function createNewContact() {
     $data = array("values" => array(), "errors" => array(), "validForm" => false);
+    $data["values"]["gender"] = "";
+    $data["values"]["name"] = "";
+    $data["values"]["email"] = "";
+    $data["values"]["phone"] = "";
+    $data["values"]["subject"] = "";
+    $data["values"]["comm_pref"] = "";
+    $data["values"]["message"] = "";
+    return $data;
+}
+
+function validateContact() {
     $data = cleanData($data);
     $data = validateData($data);
     $data = validateForm($data);
     return $data;
 }
 
+### $_POST
 function cleanData($data) {
     foreach ($_POST as $key => $value) {
         $value = trim($value);
         $value = stripslashes($value);
         $value = htmlspecialchars($value);
-        $data["values"][$key] = $value;
-        return $data;
+        $data["values"]["key"] = $value;
     }
+    return $data;
 }
 
 function validateData($data) {
@@ -23,7 +35,12 @@ function validateData($data) {
     $data = validateName($data);
     $data = validateEmail($data);
 }
-
+###
+function validateField($data) {
+    foreach ($data["values"] as $key => $value) {
+        $value = cleanData($value);
+    }
+}
 function validateFields($data) {
     foreach ($data["values"] as $key => $value) {
         if (empty($value)) {
@@ -87,8 +104,9 @@ function getArrayValue($array, $key, $default='') {
 }
 ###
 function showContactContent() {
-    $data = validateContact();
+    $data = createNewContact();
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $data = validateContact($data);
         if ($data["validForm"]) {
             showThankYou($data);
         }
@@ -96,7 +114,9 @@ function showContactContent() {
             showContactForm($data);
         }
     }
-    showContactForm($data);
+    else {
+        showContactForm($data);
+    }
 }
 
 function showContactError($data, $key) {
@@ -117,22 +137,22 @@ function showContactForm($data) {
                 <div>
                     <div class="form_group">
                         <label class="form_label" for="name">Name</label>
-                        <input class="form_response" type="text" id="name" name="name" value="' . getArrayVal($data["values"], "name") . '">
+                        <input class="form_response" type="text" id="name" name="name" value="' . getArrayValue($data["values"], "name") . '">
                         ' . showContactError($data, "name") . '
                     </div>
                     <div  class="form_group">
                         <label class="form_label" for="email">Email</label>
-                        <input class="form_response" type="text" id="email" name="email" value="' . getArrayVal($data["values"], "email") . '">
+                        <input class="form_response" type="text" id="email" name="email" value="' . getArrayValue($data["values"], "email") . '">
                         ' . showContactError($data, "email") . '
                     </div>
                     <div class="form_group">
                         <label class="form_label" for="phone">Phone</label>
-                        <input class="form_response" type="text" id="phone" name="phone" value="' . getArrayVal($data["values"], "phone") . '">
+                        <input class="form_response" type="text" id="phone" name="phone" value="' . getArrayValue($data["values"], "phone") . '">
                         ' . showContactError($data, "phone") . '
                     </div>
                     <div class="form_group">
                         <label class="form_label" for="subject">Subject</label>
-                        <input class="form_response" type="text" id="subject" name="subject" value="' . getArrayVal($data["values"], "subject") . '">
+                        <input class="form_response" type="text" id="subject" name="subject" value="' . getArrayValue($data["values"], "subject") . '">
                         ' . showContactError($data, "subject") . '
                     </div>
                 </div>
@@ -153,7 +173,7 @@ function showContactForm($data) {
                 <div class="form_group">
                     <label class="form_label" for="message">Message</label>
                     <div class="form_group">
-                        <textarea class="form_response" name="message" id="form_response_msg" cols="30" rows="10" value="' . getArrayVal($data["values"], "message") . '"></textarea>
+                        <textarea class="form_response" name="message" id="form_response_msg" cols="30" rows="10" value="' . getArrayValue($data["values"], "message") . '"></textarea>
                         ' . showContactError($data, "message") . '
                     </div>
                 </div>
