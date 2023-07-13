@@ -2,10 +2,6 @@
 $page = getRequestedPage();
 showResponsePage($page);
 
-function processRequest() {
-    ### 
-}
-
 function getRequestedPage() {
     switch($_SERVER["REQUEST_METHOD"]) {
         case "GET":
