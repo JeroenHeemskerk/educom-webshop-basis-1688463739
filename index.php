@@ -1,5 +1,6 @@
 <?php
 $page = getRequestedPage();
+$data = processRequest($page);
 showResponsePage($page);
 
 function getRequestedPage() {
@@ -9,6 +10,39 @@ function getRequestedPage() {
         case "POST":
             return "contact";
     }
+}
+
+function processRequest($page) {
+    switch($page) {
+        case "contact":
+            require "contact.php";
+            $data = validateContact();
+            if ($data["validForm"]) {
+                $page = "thanks";
+            }
+            break;
+        case "register":
+            $data = validateRegister();
+            if ($data["validRegistration"]) {
+                storeUser();
+                $page = "login";
+            }
+            break;
+        case "login":
+            $data = validateLogin();
+            if ($data["validLogin"]) {
+                loginUser();
+                $page = "home";
+            }
+            break;
+        case "logout":
+            logoutUser();
+            $page = "home";
+            break;
+        }
+    $data["page"] = $page;
+    return $data;
+
 }
 
 function showResponsePage($page) {

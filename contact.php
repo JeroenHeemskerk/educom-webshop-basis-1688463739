@@ -62,7 +62,7 @@ function validateForm($data) {
     return $data;
 }
 
-function showThankYou($data) {
+function showContactThanks($data) {
     echo   'Thank you for reaching out.<br><br>
             Gender: ' . getArrayValue($data["values"], "gender") . '<br>
             Name: ' . getArrayValue($data["values"], "name") . '<br>
@@ -82,7 +82,7 @@ function showContactContent() {
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $data = validateContact($data);
         if ($data["validForm"]) {
-            showThankYou($data);
+            showContactThanks($data);
         }
         else {
             showContactForm($data);
