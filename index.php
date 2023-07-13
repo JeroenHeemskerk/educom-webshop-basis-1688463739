@@ -18,7 +18,6 @@ function processRequest($page) {
         case "contact":
             require "validations.php";
             $data = validateContact();
-            var_dump($data);
             if ($data["validForm"]) {
                 $page = "thanks";
             }

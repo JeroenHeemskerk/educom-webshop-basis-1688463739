@@ -44,7 +44,8 @@ function validateContactForm($data) {
 }
 
 function validateContact() {
-    $data = array("values" => array(), "errors" => array(), "validForm" => false);
+    $contact_fields = array("gender"=>"","name"=>"","email"=>"","phone"=>"","subject"=>"","comm_pref"=>"","message"=>"");
+    $data = array("values" => $contact_fields, "errors" => array(), "validForm" => false);
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $data = cleanContactData($data);
         $data = validateContactFields($data);
