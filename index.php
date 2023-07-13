@@ -1,22 +1,24 @@
 <?php
 $page = getRequestedPage();
 $data = processRequest($page);
-showResponsePage($page);
+showResponsePage($data);
 
 function getRequestedPage() {
-    switch($_SERVER["REQUEST_METHOD"]) {
-        case "GET":
-            return $_GET['page'];
-        case "POST":
-            return "contact";
+    if ($_SERVER["REQUEST_METHOD"] == "GET") {
+        $page = $_GET["page"];
     }
+    elseif ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $page = $_POST["page"];
+    }
+    return $page;
 }
 
 function processRequest($page) {
     switch($page) {
         case "contact":
-            require "contact.php";
+            require "validations.php";
             $data = validateContact();
+            var_dump($data);
             if ($data["validForm"]) {
                 $page = "thanks";
             }
@@ -45,10 +47,10 @@ function processRequest($page) {
 
 }
 
-function showResponsePage($page) {
+function showResponsePage($data) {
     showDocumentStart();
-    showHeadSection($page);
-    showBodySection($page);
+    showHeadSection($data);
+    showBodySection($data);
     showDocumentEnd();
 }   
 
@@ -57,18 +59,18 @@ function showDocumentStart() {
           <html>';
 }
 
-function showHeadSection($page) {
+function showHeadSection($data) {
     echo '<head>
-            <title>' . $page . '</title>
+            <title>' . ucfirst($data["page"]) . '</title>
             <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
             <link rel="stylesheet" href="CSS/stylesheet.css">
          </head>';
 }
 
-function showBodySection($page) {
+function showBodySection($data) {
     showBodyStart();
     showMenu();
-    showContent($page);
+    showContent($data);
     showFooter();
     showBodyEnd();
 }
@@ -93,8 +95,12 @@ function showMenu() {
             </header><br>';
 }
 
-function showContent($page) {
-    switch ($page) {
+function showPageNotFound() {
+    ###
+}
+
+function showContent($data) {
+    switch ($data["page"]) {
        case "home":
             require "home.php";
             showHomeContent();
@@ -105,7 +111,19 @@ function showContent($page) {
             break;
         case "contact":
             require "contact.php";
-            showContactContent();
+            showContactForm($data);
+            break;
+        case "thanks":
+            require "contact.php";
+            showContactThanks($data);
+            break;
+        case "register":
+            require "register.php";
+            showRegisterPage();
+            break;
+        case "login":
+            require "login.php";
+            showLoginPage();
             break;
     }
 }

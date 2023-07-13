@@ -1,66 +1,16 @@
 <?php 
 
-function createNewContact() {
-    $data = array("values" => array(), "errors" => array(), "validForm" => false);
-    $data["values"]["gender"] = "";
-    $data["values"]["name"] = "";
-    $data["values"]["email"] = "";
-    $data["values"]["phone"] = "";
-    $data["values"]["subject"] = "";
-    $data["values"]["comm_pref"] = "";
-    $data["values"]["message"] = "";
-    return $data;
-}
-
-function validateContact($data) {
-    $data = cleanData($data);
-    $data = validateData($data);
-    $data = validateForm($data);
-    return $data;
-}
-
-function cleanData($data) {
-    foreach ($_POST as $key => $value) {
-        $value = trim($value);
-        $value = stripslashes($value);
-        $value = htmlspecialchars($value);
-        $data["values"][$key] = $value;
-    }
-    return $data;
-}
-###
-function validateData($data) {
-    foreach ($data["values"] as $key => $value) {
-        if (empty($value)) {
-            if ($key == "comm_pref") {
-                $data["errors"][$key] = "Communication preference is required";
-            }
-            else {
-                $data["errors"][$key] = ucfirst($key) .  " is required";
-            }
-        }
-        else {
-            switch($key) {
-                case "name":
-                    if (!preg_match("/^[a-zA-Z-' ]*$/",$data["values"]["name"])) {
-                        $data["errors"]["name"] = "Only letters and white space allowed";
-                    }
-                case "email":
-                    if (!filter_var($data["values"]["email"], FILTER_VALIDATE_EMAIL)) {
-                        $data["errors"]["email"] = "Invalid email format";
-                    }
-            } 
-        }
-    }
-    return $data;
-}
-
-function validateForm($data) {
-    if (empty($data["errors"])) {
-        $data["validForm"] = true;
-    }
-    return $data;
-}
+// function createNewContact() {
+//     $data = array("values" => array(), "errors" => array(), "validForm" => false);
+//     $data["values"]["gender"] = "";
+//     $data["values"]["name"] = "";
+//     $data["values"]["email"] = "";
+//     $data["values"]["phone"] = "";
+//     $data["values"]["subject"] = "";
+//     $data["values"]["comm_pref"] = "";
+//     $data["values"]["message"] = "";
+//     return $data;
+// }
 
 function showContactThanks($data) {
     echo   'Thank you for reaching out.<br><br>
@@ -76,22 +26,6 @@ function showContactThanks($data) {
 function getArrayValue($array, $key, $default='') { 
     return isset($array[$key]) ? $array[$key] : $default; 
 }
-###
-function showContactContent() {
-    $data = createNewContact();
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $data = validateContact($data);
-        if ($data["validForm"]) {
-            showContactThanks($data);
-        }
-        else {
-            showContactForm($data);
-        }
-    }
-    else {
-        showContactForm($data);
-    }
-}
 
 function showFormError($data, $key) {
     if (empty(getArrayValue($data["errors"], $key))) {
@@ -104,6 +38,7 @@ function showFormError($data, $key) {
 
 function showContactForm($data) {
     echo    '<form action="index.php" method="POST">
+                <input type="hidden" id="page" name="page" value="contact">
 <!- Dropdown menu ->
                 <div class="form_group">    
                     <label class="form_label" for="gender">Gender</label> 
@@ -122,7 +57,7 @@ function showContactForm($data) {
                     </div>
                     <div  class="form_group">
                         <label class="form_label" for="email">Email</label>
-                        <input class="form_response" type="text" id="email" name="email" value="' . getArrayValue($data["values"], "email") . '">
+                        <input class="form_response" type="email" id="email" name="email" value="' . getArrayValue($data["values"], "email") . '">
                         ' . showFormError($data, "email") . '
                     </div>
                     <div class="form_group">
