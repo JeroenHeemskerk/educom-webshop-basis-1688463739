@@ -1,9 +1,5 @@
 <?php 
 
-function getArrayValue($array, $key, $default='') { 
-    return isset($array[$key]) ? $array[$key] : $default; 
-}
-
 function showContactThanks($data) {
     echo   '<div class="content">
                 Thank you for reaching out.<br><br>
@@ -15,15 +11,6 @@ function showContactThanks($data) {
                 Communication preference: ' . getArrayValue($data["values"], "communication_preference") . '<br>
                 Message: ' . getArrayValue($data["values"], "message") . '<br>
             </div>';  
-}
-
-function showFormError($data, $key) {
-    if (empty(getArrayValue($data["errors"], $key))) {
-        return '<span class="error">' . getArrayValue($data["errors"], $key) . '</span>';
-    }
-    else {
-        return '<span class="error">* ' . getArrayValue($data["errors"], $key) . '</span>';
-    }
 }
 
 function showContactForm($data) {
@@ -43,7 +30,7 @@ function showContactForm($data) {
                     ' . showFormError($data, "gender") . '
                     <br>
 
-            <!- INPUTFIELDS ->     
+            <!- TEXTFIELDS ->     
                         <label for="name">Name</label>
                         <br>
                         <input type="text" name="name" value="' . getArrayValue($data["values"], "name") . '">
@@ -84,7 +71,6 @@ function showContactForm($data) {
                         <textarea name="message" cols="30" rows="10" value="' . getArrayValue($data["values"], "message") . '"></textarea>
                         ' . showFormError($data, "message") . '
                         <br>
-
 
             <!- SUBMIT ->
                     <input class="submit" type="submit" value="Submit">

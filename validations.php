@@ -50,7 +50,8 @@ function validateContact() {
 }
 
 function validateRegister() {
-    $register_fields = array("email"=>"","name"=>"","password"=>"");
-    $data = array("values"=>$register_fields,"validRegistration"=>false);
+    $register_fields = array("email"=>"","name"=>"","password"=>"","confirm_password"=>"");
+    $data = array("values"=>$register_fields,"errors"=>array(),"validRegistration"=>false);
 
+    return $data;
 }

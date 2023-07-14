@@ -121,7 +121,7 @@ function showContent($data) {
             break;
         case "register":
             require "register.php";
-            showRegisterPage();
+            showRegisterPage($data);
             break;
         case "login":
             require "login.php";
@@ -138,4 +138,17 @@ function showFooter() {
 
 function showBodyEnd() {
     echo    '</body>';
+}
+
+function getArrayValue($array, $key, $default='') { 
+    return isset($array[$key]) ? $array[$key] : $default; 
+}
+
+function showFormError($data, $key) {
+    if (empty(getArrayValue($data["errors"], $key))) {
+        return '<span class="error">' . getArrayValue($data["errors"], $key) . '</span>';
+    }
+    else {
+        return '<span class="error">* ' . getArrayValue($data["errors"], $key) . '</span>';
+    }
 }
