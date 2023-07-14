@@ -13,12 +13,7 @@ function cleanContactData($data) {
 function validateContactFields($data) {
     foreach ($data["values"] as $key => $value) {
         if (empty($value)) {
-            if ($key == "comm_pref") {
-                $data["errors"][$key] = "Communication preference is required";
-            }
-            else {
-                $data["errors"][$key] = ucfirst($key) .  " is required";
-            }
+            $data["errors"][$key] = ucfirst($key) .  " is required";
         }
         else {
             switch($key) {
@@ -44,7 +39,7 @@ function validateContactForm($data) {
 }
 
 function validateContact() {
-    $contact_fields = array("gender"=>"","name"=>"","email"=>"","phone"=>"","subject"=>"","comm_pref"=>"","message"=>"");
+    $contact_fields = array("gender"=>"","name"=>"","email"=>"","phone"=>"","subject"=>"","communication preference"=>"","message"=>"");
     $data = array("values" => $contact_fields, "errors" => array(), "validForm" => false);
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $data = cleanContactData($data);
@@ -52,4 +47,10 @@ function validateContact() {
         $data = validateContactForm($data);
     }
     return $data;
+}
+
+function validateRegister() {
+    $register_fields = array("email"=>"","name"=>"","password"=>"");
+    $data = array("values"=>$register_fields,"validRegistration"=>false);
+
 }

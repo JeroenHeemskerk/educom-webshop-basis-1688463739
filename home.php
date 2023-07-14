@@ -1,10 +1,14 @@
 <?php  
 
 function showHomeContent() {
-    echo    '<div class="profile_container">
-                <img class="profile-img" src="img/profile_picture.JPG" alt="A profile picture of me">
-                <h2 id="profile_name" class="profile">Quincy Tromp</h2>
-                <h4 id="profile_desc" class="profile">Trainee Application/Software Development at Educom</h4><br>
+    echo   '<h1>Home</h1>
+            <div class="row">
+                <div class="column">
+                    <p id="welcome" class="home">Hi! I\'m Quincy.<br>Welcome to my website.</p>
+                </div>
+                <div class="column">
+                    <img class="home" src="img/profile_picture.JPG" alt="A profile picture of me">
+                </div>
             </div>
-            <p id="welcome_p" class="profile">Welcome to my website.</p>';
+            <button type="button" class="get_in_touch"><a href="index.php?page=contact">Get in Touch</a></button>';
 }

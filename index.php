@@ -23,6 +23,7 @@ function processRequest($page) {
             }
             break;
         case "register":
+            require "validations.php";
             $data = validateRegister();
             if ($data["validRegistration"]) {
                 storeUser();
@@ -30,6 +31,7 @@ function processRequest($page) {
             }
             break;
         case "login":
+            require "validations.php";
             $data = validateLogin();
             if ($data["validLogin"]) {
                 loginUser();
@@ -83,15 +85,15 @@ function showBodyStart() {
 }
 
 function showMenu() {
-    echo    '<header id="header">
-                <div class="navbar_container">
+    echo   '<header>
+                <nav>
                     <ul id="navbar">
                         <li><a class="navlink" href="index.php?page=home">Home</a></li>
                         <li><a class="navlink" href="index.php?page=about">About Me</a></li>
                         <li><a class="navlink" href="index.php?page=contact">Contact</a></li>
                     </ul>
-                </div>
-            </header><br>';
+                </nav>
+            </header>';
 }
 
 function showPageNotFound() {
@@ -128,11 +130,9 @@ function showContent($data) {
 }
 
 function showFooter() {
-    echo    '<div class="foot_container">
-                <footer id="footer" class="footer">
-                    <p id="footer_text">Copyright &copy; Quincy 2023</p>
-                </footer>
-            </div>';
+    echo   '<footer>
+                <p>Copyright &copy; Quincy 2023</p>
+            </footer>';
 }
 
 function showBodyEnd() {

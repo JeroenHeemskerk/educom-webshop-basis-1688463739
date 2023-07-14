@@ -1,16 +1,8 @@
 <?php 
 
-// function createNewContact() {
-//     $data = array("values" => array(), "errors" => array(), "validForm" => false);
-//     $data["values"]["gender"] = "";
-//     $data["values"]["name"] = "";
-//     $data["values"]["email"] = "";
-//     $data["values"]["phone"] = "";
-//     $data["values"]["subject"] = "";
-//     $data["values"]["comm_pref"] = "";
-//     $data["values"]["message"] = "";
-//     return $data;
-// }
+function getArrayValue($array, $key, $default='') { 
+    return isset($array[$key]) ? $array[$key] : $default; 
+}
 
 function showContactThanks($data) {
     echo   'Thank you for reaching out.<br><br>
@@ -23,10 +15,6 @@ function showContactThanks($data) {
             Message: ' . getArrayValue($data["values"], "message") . '<br>';   
 }
 
-function getArrayValue($array, $key, $default='') { 
-    return isset($array[$key]) ? $array[$key] : $default; 
-}
-
 function showFormError($data, $key) {
     if (empty(getArrayValue($data["errors"], $key))) {
         return '<span class="error">' . getArrayValue($data["errors"], $key) . '</span>';
@@ -37,9 +25,11 @@ function showFormError($data, $key) {
 }
 
 function showContactForm($data) {
-    echo    '<form action="index.php" method="POST">
+    echo   '<h1>Contact Me</h1>
+            <form action="index.php" method="POST">
                 <input type="hidden" id="page" name="page" value="contact">
-<!- Dropdown menu ->
+
+            <!- Dropdown menu ->
                 <div class="form_group">    
                     <label class="form_label" for="gender">Gender</label> 
                     <select id="gender" name="gender">
@@ -48,8 +38,8 @@ function showContactForm($data) {
                     </select>
                     ' . showFormError($data, "gender") . '
                 </div>
-<!- Inputfields ->
-                <div>
+                
+            <!- Inputfields ->
                     <div class="form_group">
                         <label class="form_label" for="name">Name</label>
                         <input class="form_response" type="text" id="name" name="name" value="' . getArrayValue($data["values"], "name") . '">
@@ -70,17 +60,17 @@ function showContactForm($data) {
                         <input class="form_response" type="text" id="subject" name="subject" value="' . getArrayValue($data["values"], "subject") . '">
                         ' . showFormError($data, "subject") . '
                     </div>
-                </div>
-<!- Radio buttons ->
+
+            <!- Radio buttons ->
                 <div class="form_group">
-                    <label id="comm_pref" class="form_label" for="comm_pref">Communication preference</label>
-                    ' . showFormError($data, "comm_pref") . '
+                    <label id="communication preference" class="form_label" for="communication preference">Communication preference</label>
+                    ' . showFormError($data, "communication preference") . '
                     <div class="form_group">
-                        <input type="radio" value="Email" id="email" name="comm_pref">
+                        <input type="radio" value="Email" id="email" name="communication preference">
                         <label class="form_label" for="email">Email</label>
                     </div>
                     <div class="form_group">
-                        <input type="radio" value="Phone" id="phone" name="comm_pref">
+                        <input type="radio" value="Phone" id="phone" name="communication preference">
                         <label class="form_label" for="phone">Phone</label>
                     </div>
                 </div>
@@ -93,6 +83,6 @@ function showContactForm($data) {
                     </div>
                 </div>
 <!- Submit button ->
-                <input class="form_submit_btn" type="submit" value="Submit">
+                <input class="submit" type="submit" value="SUBMIT">
             </form>';
 }
