@@ -13,7 +13,7 @@ function cleanContactData($data) {
 function validateContactFields($data) {
     foreach ($data["values"] as $key => $value) {
         if (empty($value)) {
-            $data["errors"][$key] = ucfirst($key) .  " is required";
+            $data["errors"][$key] = ucfirst(str_replace("_", " ", $key)) .  " is required";
         }
         else {
             switch($key) {
@@ -39,7 +39,7 @@ function validateContactForm($data) {
 }
 
 function validateContact() {
-    $contact_fields = array("gender"=>"","name"=>"","email"=>"","phone"=>"","subject"=>"","communication preference"=>"","message"=>"");
+    $contact_fields = array("gender"=>"","name"=>"","email"=>"","phone"=>"","subject"=>"","communication_preference"=>"","message"=>"");
     $data = array("values" => $contact_fields, "errors" => array(), "validForm" => false);
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $data = cleanContactData($data);

@@ -88,9 +88,9 @@ function showMenu() {
     echo   '<header>
                 <nav>
                     <ul id="navbar">
-                        <li><a class="navlink" href="index.php?page=home">Home</a></li>
-                        <li><a class="navlink" href="index.php?page=about">About Me</a></li>
-                        <li><a class="navlink" href="index.php?page=contact">Contact</a></li>
+                        <li><button type="button"><a class="navlink" href="index.php?page=home">Home</a></button></li>
+                        <li><button type="button"><a class="navlink" href="index.php?page=about">About Me</a></button></li>
+                        <li><button type="button"><a class="navlink" href="index.php?page=contact">Contact</a></button></li>
                     </ul>
                 </nav>
             </header>';
