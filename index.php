@@ -91,6 +91,7 @@ function showMenu() {
                         <li><button type="button"><a class="navlink" href="index.php?page=home">Home</a></button></li>
                         <li><button type="button"><a class="navlink" href="index.php?page=about">About Me</a></button></li>
                         <li><button type="button"><a class="navlink" href="index.php?page=contact">Contact</a></button></li>
+                        <li><button type="button"><a class="navlink" href="index.php?page=register">Register</a></button></li>
                     </ul>
                 </nav>
             </header>';

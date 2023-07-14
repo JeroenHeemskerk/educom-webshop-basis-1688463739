@@ -1,6 +1,3 @@
-/******************************************************
-General section 
-******************************************************/
 
 body {
     max-width: 800px;
@@ -85,6 +82,10 @@ header button {
     text-decoration: none;
 }
 
+.aboutme {
+    margin-left: 50px;
+}
+
 .about_img {
     width: 22%;
 }
@@ -96,49 +97,33 @@ footer {
     background-color: #DDE6ED;
 }
 
-.footer p {
-    top: 50%;
-}
-/******************************************************
-FORM section 
-******************************************************/
-
 form {
     margin-left: 50px;
-}
-
-.form_group {
     display: block;
-    margin-top: 8px;
     color: #526D82;
     font-weight: 600;
-    height: 32px;
-
 }
-.form_group label {
+
+form label {
     display: inline-block;
-    width: 50px;
     text-align: left;
-    
-}
-.form_group input, .form_group select, .form_group textarea {
-    background-color: #DDE6ED;
-    margin-left: 12px;
-    width: 400px;
+    margin-top: 10px;  
 }
 
-.form_group select, input[type="radio"], label[for="communication_preference"]  {
+form input, textarea {
+    background-color: rgb(233,233,237);
+    width: 300px;
+}
+
+form input[type="radio"] {
     width: auto;
-    color: #526D82;
-    font-weight: 600;
 }
 
-.form_group label[for="message"] {
-    margin-top: 20px;
-}
-
-.form_group textarea, input[value="Email"] {
-    margin-left: 70px;
+.radio {
+    font-size: 16px;
+    font-weight: lighter;
+    color: black;
+    width: auto;
 }
 
 .submit {
@@ -149,12 +134,16 @@ form {
     border-color: #525FE1;
     font-size: light;
     font-weight: bold;
-    margin-left: 200px;
-    margin-top: 225px;
+    margin-top: 50px;
+    margin-bottom: 50px;
     font-size: 18px;
 
 }
 
 .error {
     color: red;
+}
+
+.register label {
+    width: 100px;
 }

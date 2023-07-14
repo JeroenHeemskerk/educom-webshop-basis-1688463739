@@ -32,61 +32,62 @@ function showContactForm($data) {
                 <form action="index.php" method="POST">
                     <input type="hidden" id="page" name="page" value="contact">
 
-        <!- DROPDOWN ->
-                    <div class="form_group">    
-                        <label class="form_label" for="gender">Gender</label> 
-                        <select id="gender" name="gender">
-                            <option value="Male">Male</option>
-                            <option value="Female">Female</option>
-                        </select>
-                        ' . showFormError($data, "gender") . '
-                    </div>
-                    
-         <!- INPUTFIELDS ->
-                        <div class="form_group">
-                            <label class="form_label" for="name">Name</label>
-                            <input class="form_response" type="text" id="name" name="name" value="' . getArrayValue($data["values"], "name") . '">
-                            ' . showFormError($data, "name") . '
-                        </div>
-                        <div  class="form_group">
-                            <label class="form_label" for="email">Email</label>
-                            <input class="form_response" type="email" id="email" name="email" value="' . getArrayValue($data["values"], "email") . '">
-                            ' . showFormError($data, "email") . '
-                        </div>
-                        <div class="form_group">
-                            <label class="form_label" for="phone">Phone</label>
-                            <input class="form_response" type="text" id="phone" name="phone" value="' . getArrayValue($data["values"], "phone") . '">
-                            ' . showFormError($data, "phone") . '
-                        </div>
-                        <div class="form_group">
-                            <label class="form_label" for="subject">Subject</label>
-                            <input class="form_response" type="text" id="subject" name="subject" value="' . getArrayValue($data["values"], "subject") . '">
-                            ' . showFormError($data, "subject") . '
-                        </div>
+            <!- DROPDOWN ->
+                    <label for="gender">Gender</label> 
+                    <br>
+                    <select id="gender" name="gender">
+                        <option value="">Choose</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                    ' . showFormError($data, "gender") . '
+                    <br>
 
-        <!- RADIO BUTTONS ->
-                    <div class="form_group">
-                        <label id="communication preference" class="form_label" for="communication_preference">Communication preference</label>
+            <!- INPUTFIELDS ->     
+                        <label for="name">Name</label>
+                        <br>
+                        <input type="text" name="name" value="' . getArrayValue($data["values"], "name") . '">
+                        ' . showFormError($data, "name") . '
+                        <br>
+
+                        <label for="email">Email</label>
+                        <br>
+                        <input type="email" name="email" value="' . getArrayValue($data["values"], "email") . '">
+                        ' . showFormError($data, "email") . '
+                        <br>
+
+                        <label for="phone">Phone</label>
+                        <br>
+                        <input type="text" name="phone" value="' . getArrayValue($data["values"], "phone") . '">
+                        ' . showFormError($data, "phone") . '
+                        <br>
+
+                        <label for="subject">Subject</label>
+                        <br>
+                        <input type="text" name="subject" value="' . getArrayValue($data["values"], "subject") . '">
+                        ' . showFormError($data, "subject") . '
+                        <br>
+
+            <!- RADIO BUTTONS ->
+                        <label for="communication_preference">Communication preference</label>
+                        <br>
+                        <input type="radio" value="Email" name="communication_preference">
+                        <label for="email" class="radio">Email</label>
+                        <input type="radio" value="Phone" name="communication_preference">
+                        <label for="phone" class="radio">Phone</label>
                         ' . showFormError($data, "communication_preference") . '
-                        <div class="form_group"> 
-                            <input type="radio" value="Email" id="email" name="communication_preference">
-                            <label class="form_label" for="email">Email</label>
-                            <input type="radio" value="Phone" id="phone" name="communication_preference">
-                            <label class="form_label" for="phone">Phone</label>
-                        </div>
-                    </div>
+                        <br>
 
-         <!- TEXTAREA ->
-                    <div class="form_group">
-                        <label class="form_label" for="message">Message</label>
-                        <div class="form_group">
-                            <textarea class="form_response" name="message" cols="30" rows="10" value="' . getArrayValue($data["values"], "message") . '"></textarea>
-                            ' . showFormError($data, "message") . '
-                        </div>
-                    </div>
+            <!- TEXTAREA ->
+                        <label for="message">Message</label>
+                        <br>
+                        <textarea name="message" cols="30" rows="10" value="' . getArrayValue($data["values"], "message") . '"></textarea>
+                        ' . showFormError($data, "message") . '
+                        <br>
 
-        <!- SUBMIT ->
-                    <input class="submit" type="submit" value="SUBMIT">
+
+            <!- SUBMIT ->
+                    <input class="submit" type="submit" value="Submit">
                 </form>
             </div>';
 }
