@@ -33,13 +33,26 @@ function validateFields($data) {
                         $data["errors"]["email"] = "Invalid email format";
                         break;
                     }
-        if ($data["page"] == "register") {
-            if ($data["values"]["confirm_password"] != $data["values"]["password"]) {
-                $data["errors"]["confirm_password"] = "Passwords do not match";
-                break;
+                }   
+            } 
+    }  
+    if ($data["page"] == "register") {
+        if ($data["values"]["confirm_password"] != $data["values"]["password"]) {
+            $data["errors"]["confirm_password"] = "Those passwords didn't match. Try again";
+        }
+        else {
+            $data = doesUserExist($data);
+            if ($data["user"]["user_exists"]) {
+                $data["errors"]["user_exists"] = "A user with the same email already exists";
             }
         }
-            } 
+    }
+    elseif ($data["page"] == "login") {
+        $data = doesUserExist($data);
+        if ($data["user"]["user_exists"]) {
+            if (!authenticateUser($data)) {
+                $data["errors"]["authentication"] = "The email and/or password do not match";
+            }
         } 
     }
     return $data;
@@ -54,7 +67,7 @@ function validateData($data) {
 
 function validateContact() {
     $contact_fields = array("gender"=>"","name"=>"","email"=>"","phone"=>"","subject"=>"","communication_preference"=>"","message"=>"");
-    $data = array("values" => $contact_fields, "errors" => array(), "valid" => false);
+    $data = array("values"=>$contact_fields,"errors"=>array(),"valid"=>false);
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $data = cleanData($data);
         $data = validateFields($data);
@@ -65,25 +78,26 @@ function validateContact() {
 
 function validateRegister() {
     $register_fields = array("email"=>"","name"=>"","password"=>"","confirm_password"=>"");
-    $data = array("values"=>$register_fields,"errors"=>array(),"valid"=>false);
+    $data = array("values"=>$register_fields,"errors"=>array(),"user"=>array(),"valid"=>false);
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $data = cleanData($data);
         $data = validateFields($data);
-        $data = validateUser($data);
         $data = validateData($data);
     }
     return $data;
 }
 
-function validateUser($data) {
-    $user_already_exist = false;
+function doesUserExist($data) {
     $users_file = fopen("users/users.txt", "r") or die("Unable to open file.");
     fgets($users_file); # File header
 
     while (!feof($users_file)) {
-        $existing_user_email = explode("|", fgets($users_file))[0];
-        if ($data["values"]["email"] == $existing_user_email) {
-            $data["errors"]["user"] = "A user with the same email already exists";
+        $user = explode("|", fgets($users_file));
+        if ($data["values"]["email"] == $user[0]) {
+            $data["user"]["user_exists"] = true;
+            $data["user"]["email"] = $user[0];
+            $data["user"]["name"] = $user[1];
+            $data["user"]["password"] = $user[2];
             break;
         }
     }
@@ -91,9 +105,20 @@ function validateUser($data) {
     return $data;
 }
 
-function storeUser($data) {
-    $users_file = fopen("users/users.txt", "a");
-    $new_user = "\n" . $data["values"]["email"] . "|" . $data["values"]["name"] . "|" . $data["values"]["password"];
-    fwrite($users_file, $new_user);
-    fclose($users_file);
+function authenticateUser($data) {
+    return ($data["values"]["email"] == $data["user"]["email"] && $data["values"]["password"] == $data["user"]["password"]);
+}
+
+function validateLogin() {
+    $data = array("values"=>array(),"errors"=>array(),"user"=>array(),"valid"=>false);
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $data = cleanData($data);
+        $data = validateFields($data);
+        $data = validateData($data);
+    }
+    return $data;
+}
+
+function loginUser($data) {
+    #
 }

@@ -34,7 +34,7 @@ function processRequest($page) {
             require "validations.php";
             $data = validateLogin();
             if ($data["valid"]) {
-                loginUser();
+                loginUser($data);
                 $page = "home";
             }
             break;
@@ -92,6 +92,7 @@ function showMenu() {
                         <li><button type="button"><a class="navlink" href="index.php?page=about">About Me</a></button></li>
                         <li><button type="button"><a class="navlink" href="index.php?page=contact">Contact</a></button></li>
                         <li><button type="button"><a class="navlink" href="index.php?page=register">Register</a></button></li>
+                        <li><button type="button"><a class="navlink" href="index.php?page=login">Login</a></button></li>
                     </ul>
                 </nav>
             </header>';
@@ -125,7 +126,7 @@ function showContent($data) {
             break;
         case "login":
             require "login.php";
-            showLoginPage();
+            showLoginPage($data);
             break;
     }
 }
@@ -151,4 +152,11 @@ function showFormError($data, $key) {
     else {
         return '<span class="error">* ' . getArrayValue($data["errors"], $key) . '</span>';
     }
+}
+
+function storeUser($data) {
+    $users_file = fopen("users/users.txt", "a");
+    $new_user = "\n" . $data["values"]["email"] . "|" . $data["values"]["name"] . "|" . $data["values"]["password"];
+    fwrite($users_file, $new_user);
+    fclose($users_file);
 }

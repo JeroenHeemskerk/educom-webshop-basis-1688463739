@@ -6,7 +6,7 @@ function showAboutContent() {
                 <div class="aboutme">
                     <img class="about_img" src="img/profile_picture.JPG" alt="A profile picture of me">
                     <p>
-                        I\'m an application/software development trainee. And my goal is to become a data engineer.<br>
+                        I\'m an application/software development trainee. My goal is to become a data engineer.<br>
                         I\'m currently working at Educom, to get a solid foundation in programming.
                     </p>
                     <p>

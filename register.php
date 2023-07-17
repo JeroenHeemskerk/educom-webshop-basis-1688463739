@@ -11,7 +11,7 @@ function showRegisterPage($data) {
                     <br>
                     <input type="email" name="email" value="' . getArrayValue($data["values"], "email") . '">
                     ' . showFormError($data, "email") . '
-                    ' . showFormError($data, "user") . '
+                    ' . showFormError($data, "user_exists") . '
                     <br>
 
                     <label for="name">Name</label>
