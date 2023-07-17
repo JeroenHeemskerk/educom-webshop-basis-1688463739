@@ -69,22 +69,31 @@ function validateRegister() {
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $data = cleanData($data);
         $data = validateFields($data);
+        $data = validateUser($data);
         $data = validateData($data);
     }
     return $data;
 }
 
 function validateUser($data) {
+    $user_already_exist = false;
     $users_file = fopen("users/users.txt", "r") or die("Unable to open file.");
-    $existing_users = fread($users_file, filesize("users/users.txt"));
-    if (str_contains($existing_users, $data["values"]["email"])) {
-        $data["errors"]["user"] = "A user with that same email already exists";
+    fgets($users_file); # File header
+
+    while (!feof($users_file)) {
+        $existing_user_email = explode("|", fgets($users_file))[0];
+        if ($data["values"]["email"] == $existing_user_email) {
+            $data["errors"]["user"] = "A user with the same email already exists";
+            break;
+        }
     }
     fclose($users_file);
     return $data;
 }
 
 function storeUser($data) {
-    fopen("users/users.txt", "a");
-    validateUser($data);
+    $users_file = fopen("users/users.txt", "a");
+    $new_user = "\n" . $data["values"]["email"] . "|" . $data["values"]["name"] . "|" . $data["values"]["password"];
+    fwrite($users_file, $new_user);
+    fclose($users_file);
 }

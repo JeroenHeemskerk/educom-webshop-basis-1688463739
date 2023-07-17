@@ -2,7 +2,7 @@
 
 function showRegisterPage($data) {
     echo '  <div class="content">
-                <h1>Register</h1>
+                <h1>Registration</h1>
                 <form action="index.php" method="POST">
                     <input type="hidden" name="page" value="register">
 
