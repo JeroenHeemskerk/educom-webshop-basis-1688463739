@@ -11,6 +11,7 @@ function showRegisterPage($data) {
                     <br>
                     <input type="email" name="email" value="' . getArrayValue($data["values"], "email") . '">
                     ' . showFormError($data, "email") . '
+                    ' . showFormError($data, "user") . '
                     <br>
 
                     <label for="name">Name</label>
@@ -21,7 +22,7 @@ function showRegisterPage($data) {
 
                     <label for="password">Password</label>
                     <br>
-                    <input type="text" name="phone" value="' . getArrayValue($data["values"], "password") . '">
+                    <input type="text" name="password" value="' . getArrayValue($data["values"], "password") . '">
                     ' . showFormError($data, "password") . '
                     <br>
 

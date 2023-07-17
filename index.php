@@ -18,22 +18,22 @@ function processRequest($page) {
         case "contact":
             require "validations.php";
             $data = validateContact();
-            if ($data["validForm"]) {
+            if ($data["valid"]) {
                 $page = "thanks";
             }
             break;
         case "register":
             require "validations.php";
             $data = validateRegister();
-            if ($data["validRegistration"]) {
-                storeUser();
+            if ($data["valid"]) {
+                storeUser($data);
                 $page = "login";
             }
             break;
         case "login":
             require "validations.php";
             $data = validateLogin();
-            if ($data["validLogin"]) {
+            if ($data["valid"]) {
                 loginUser();
                 $page = "home";
             }
