@@ -88,6 +88,7 @@ function validateRegister() {
 }
 
 function doesUserExist($data) {
+    $data["user"]["user_exists"] = false;
     $users_file = fopen("users/users.txt", "r") or die("Unable to open file.");
     fgets($users_file); # File header
 
@@ -105,6 +106,13 @@ function doesUserExist($data) {
     return $data;
 }
 
+function storeUser($data) {
+    $users_file = fopen("users/users.txt", "a");
+    $new_user = "\n" . $data["values"]["email"] . "|" . $data["values"]["name"] . "|" . $data["values"]["password"];
+    fwrite($users_file, $new_user);
+    fclose($users_file);
+}
+
 function authenticateUser($data) {
     return ($data["values"]["email"] == $data["user"]["email"] && $data["values"]["password"] == $data["user"]["password"]);
 }
@@ -120,5 +128,5 @@ function validateLogin() {
 }
 
 function loginUser($data) {
-    #
+    session_start();
 }

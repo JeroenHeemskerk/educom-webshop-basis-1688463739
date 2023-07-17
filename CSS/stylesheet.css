@@ -34,7 +34,8 @@ header button {
     background-color: #FFA41B;
     color: white;
     border-color: #FFA41B;
-    width: 125px;
+    min-width: 125px;
+    max-width: 300px;
     padding: 8px;
 }
 

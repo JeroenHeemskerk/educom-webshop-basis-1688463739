@@ -70,7 +70,7 @@ function showHeadSection($data) {
 
 function showBodySection($data) {
     showBodyStart();
-    showMenu();
+    showMenu($data);
     showContent($data);
     showFooter();
     showBodyEnd();
@@ -84,15 +84,14 @@ function showBodyStart() {
     echo '<body>';
 }
 
-function showMenu() {
+function showMenu($data) {
     echo   '<header>
                 <nav>
                     <ul id="navbar">
                         <li><button type="button"><a class="navlink" href="index.php?page=home">Home</a></button></li>
                         <li><button type="button"><a class="navlink" href="index.php?page=about">About Me</a></button></li>
                         <li><button type="button"><a class="navlink" href="index.php?page=contact">Contact</a></button></li>
-                        <li><button type="button"><a class="navlink" href="index.php?page=register">Register</a></button></li>
-                        <li><button type="button"><a class="navlink" href="index.php?page=login">Login</a></button></li>
+                        ' . showSessionOptions($data) . '
                     </ul>
                 </nav>
             </header>';
@@ -154,9 +153,13 @@ function showFormError($data, $key) {
     }
 }
 
-function storeUser($data) {
-    $users_file = fopen("users/users.txt", "a");
-    $new_user = "\n" . $data["values"]["email"] . "|" . $data["values"]["name"] . "|" . $data["values"]["password"];
-    fwrite($users_file, $new_user);
-    fclose($users_file);
+function showSessionOptions($data) {
+    if (session_status() === PHP_SESSION_ACTIVE) {
+        $name = explode(" ", $data["user"]["name"])[0];
+        return '<li><button type="button"><a class="navlink" href="index.php?page=logout">Logout ' . $name . '</a></button></li>';
+    }
+    else {
+        return '  <li><button type="button"><a class="navlink" href="index.php?page=register">Register</a></button></li>
+                <li><button type="button"><a class="navlink" href="index.php?page=login">Login</a></button></li>';
+    }
 }
