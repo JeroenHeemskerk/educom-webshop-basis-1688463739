@@ -17,12 +17,10 @@ function showLoginPage($data) {
                     <input type="text" name="password" value="' . getArrayValue($data["values"], "password") . '">
                     ' . showFormError($data, "password") . '
                     <br>
-                    <br>
                     ' . showFormError($data, "authentication") . '
                     <br>
 
                     <input class="submit" type="submit" value="Sign In">
-                    <br>
                 </form>
             </div>';
 }

@@ -16,7 +16,8 @@ function cleanData($data) {
     return $data;
 }
 
-function validateFields($data) {
+function validateData($data) {
+    $data = cleanData($data);
     foreach ($data["values"] as $key => $value) {
         if (empty($value)) {
             $data["errors"][$key] = ucfirst(str_replace("_", " ", $key)) .  " is required";
@@ -38,7 +39,7 @@ function validateFields($data) {
     }  
     if ($data["page"] == "register") {
         if ($data["values"]["confirm_password"] != $data["values"]["password"]) {
-            $data["errors"]["confirm_password"] = "Those passwords didn't match. Try again";
+            $data["errors"]["confirm_password"] = "Passwords do not match. Try again";
         }
         else {
             $data = doesUserExist($data);
@@ -55,10 +56,6 @@ function validateFields($data) {
             }
         } 
     }
-    return $data;
-}
-
-function validateData($data) {
     if (empty($data["errors"])) {
         $data["valid"] = true;
     }
@@ -69,8 +66,6 @@ function validateContact() {
     $contact_fields = array("gender"=>"","name"=>"","email"=>"","phone"=>"","subject"=>"","communication_preference"=>"","message"=>"");
     $data = array("values"=>$contact_fields,"errors"=>array(),"valid"=>false);
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $data = cleanData($data);
-        $data = validateFields($data);
         $data = validateData($data);
     }
     return $data;
@@ -80,8 +75,6 @@ function validateRegister() {
     $register_fields = array("email"=>"","name"=>"","password"=>"","confirm_password"=>"");
     $data = array("values"=>$register_fields,"errors"=>array(),"user"=>array(),"valid"=>false);
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $data = cleanData($data);
-        $data = validateFields($data);
         $data = validateData($data);
     }
     return $data;
@@ -106,7 +99,7 @@ function doesUserExist($data) {
     return $data;
 }
 
-function storeUser($data) {
+function saveUser($data) {
     $users_file = fopen("users/users.txt", "a");
     $new_user = "\n" . $data["values"]["email"] . "|" . $data["values"]["name"] . "|" . $data["values"]["password"];
     fwrite($users_file, $new_user);
@@ -120,8 +113,6 @@ function authenticateUser($data) {
 function validateLogin() {
     $data = array("values"=>array(),"errors"=>array(),"user"=>array(),"valid"=>false);
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $data = cleanData($data);
-        $data = validateFields($data);
         $data = validateData($data);
     }
     return $data;

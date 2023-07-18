@@ -29,7 +29,7 @@ function processRequest($page) {
             require "validations.php";
             $data = validateRegister();
             if ($data["valid"]) {
-                storeUser($data);
+                saveUser($data);
                 $page = "login";
             }
             break;
@@ -68,6 +68,9 @@ function showHeadSection($data) {
             <title>' . ucfirst($data["page"]) . '</title>
             <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
             <link rel="stylesheet" href="CSS/stylesheet.css">
+            <link rel="preconnect" href="https://fonts.googleapis.com">
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+            <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
          </head>';
 }
 
@@ -166,7 +169,7 @@ function logoutUser() {
 function showMenuOption($data) {
     if (isset($_SESSION[session_id()])) {
         $data["user"] = $_SESSION[session_id()]["user"];
-        $name = explode(" ", $data["user"]["name"])[0];
+        $name = ucfirst(explode(" ", $data["user"]["name"])[0]);
         return '<li><button type="button"><a class="navlink" href="index.php?page=logout">Logout ' . $name . '</a></button></li>';
     }
     else {
