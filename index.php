@@ -94,7 +94,7 @@ function showMenu($data) {
                         <li><button type="button"><a class="navlink" href="index.php?page=home">Home</a></button></li>
                         <li><button type="button"><a class="navlink" href="index.php?page=about">About Me</a></button></li>
                         <li><button type="button"><a class="navlink" href="index.php?page=contact">Contact</a></button></li>
-                        ' . showSessionOption($data) . '
+                        ' . showMenuOption($data) . '
                     </ul>
                 </nav>
             </header>';
@@ -156,20 +156,16 @@ function showFormError($data, $key) {
 }
 
 function loginUser($data) {
-    $_SESSION["data"] = $data;
+    $_SESSION[session_id()] = $data;
 }
 
 function logoutUser() {
-    session_unset();
+    unset($_SESSION[session_id()]);
 }
 
-function isSessionStarted() {
-    return session_status() === PHP_SESSION_ACTIVE ? TRUE : FALSE;
-}
-
-function showSessionOption($data) {
-    if (isSessionStarted() && isset($_SESSION["data"])) {
-        $data["user"] = $_SESSION["data"]["user"];
+function showMenuOption($data) {
+    if (isset($_SESSION[session_id()])) {
+        $data["user"] = $_SESSION[session_id()]["user"];
         $name = explode(" ", $data["user"]["name"])[0];
         return '<li><button type="button"><a class="navlink" href="index.php?page=logout">Logout ' . $name . '</a></button></li>';
     }

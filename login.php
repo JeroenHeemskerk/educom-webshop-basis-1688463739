@@ -8,7 +8,6 @@ function showLoginPage($data) {
 
                     <label for="email">Email</label>
                     <br>
-                    ' . showFormError($data, "authentication") . '
                     <input type="email" name="email" value="' . getArrayValue($data["values"], "email") . '">
                     ' . showFormError($data, "email") . '
                     <br>
@@ -17,6 +16,9 @@ function showLoginPage($data) {
                     <br>
                     <input type="text" name="password" value="' . getArrayValue($data["values"], "password") . '">
                     ' . showFormError($data, "password") . '
+                    <br>
+                    <br>
+                    ' . showFormError($data, "authentication") . '
                     <br>
 
                     <input class="submit" type="submit" value="Sign In">
