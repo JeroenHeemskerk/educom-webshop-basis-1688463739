@@ -126,7 +126,3 @@ function validateLogin() {
     }
     return $data;
 }
-
-function loginUser($data) {
-    session_start();
-}

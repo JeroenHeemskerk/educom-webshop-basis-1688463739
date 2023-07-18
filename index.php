@@ -1,4 +1,7 @@
 <?php
+
+session_start();
+
 $page = getRequestedPage();
 $data = processRequest($page);
 showResponsePage($data);
@@ -91,14 +94,10 @@ function showMenu($data) {
                         <li><button type="button"><a class="navlink" href="index.php?page=home">Home</a></button></li>
                         <li><button type="button"><a class="navlink" href="index.php?page=about">About Me</a></button></li>
                         <li><button type="button"><a class="navlink" href="index.php?page=contact">Contact</a></button></li>
-                        ' . showSessionOptions($data) . '
+                        ' . showSessionOption($data) . '
                     </ul>
                 </nav>
             </header>';
-}
-
-function showPageNotFound() {
-    ###
 }
 
 function showContent($data) {
@@ -127,6 +126,9 @@ function showContent($data) {
             require "login.php";
             showLoginPage($data);
             break;
+        default:
+        require "404.php";
+            show404Page();
     }
 }
 
@@ -153,8 +155,21 @@ function showFormError($data, $key) {
     }
 }
 
-function showSessionOptions($data) {
-    if (session_status() === PHP_SESSION_ACTIVE) {
+function loginUser($data) {
+    $_SESSION["data"] = $data;
+}
+
+function logoutUser() {
+    session_unset();
+}
+
+function isSessionStarted() {
+    return session_status() === PHP_SESSION_ACTIVE ? TRUE : FALSE;
+}
+
+function showSessionOption($data) {
+    if (isSessionStarted() && isset($_SESSION["data"])) {
+        $data["user"] = $_SESSION["data"]["user"];
         $name = explode(" ", $data["user"]["name"])[0];
         return '<li><button type="button"><a class="navlink" href="index.php?page=logout">Logout ' . $name . '</a></button></li>';
     }
