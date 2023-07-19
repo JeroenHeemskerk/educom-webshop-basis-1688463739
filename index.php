@@ -7,11 +7,11 @@ $data = processRequest($page);
 showResponsePage($data);
 
 function getRequestedPage() {
-    if ($_SERVER["REQUEST_METHOD"] == "GET") {
-        $page = $_GET["page"];
-    }
-    elseif ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $page = $_POST["page"];
+    }
+    else {
+        $page = isset($_GET["page"]) ? $_GET["page"] : "home";
     }
     return $page;
 }
@@ -159,16 +159,16 @@ function showFormError($data, $key) {
 }
 
 function loginUser($data) {
-    $_SESSION[session_id()] = $data;
+    $_SESSION["data"] = $data;
 }
 
 function logoutUser() {
-    unset($_SESSION[session_id()]);
+    unset($_SESSION["data"]);
 }
 
 function showMenuOption($data) {
-    if (isset($_SESSION[session_id()])) {
-        $data["user"] = $_SESSION[session_id()]["user"];
+    if (isset($_SESSION["data"])) {
+        $data["user"] = $_SESSION["data"]["user"];
         $name = ucfirst(explode(" ", $data["user"]["name"])[0]);
         return '<li><button type="button"><a class="navlink" href="index.php?page=logout">Logout ' . $name . '</a></button></li>';
     }
